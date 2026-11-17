@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "8c26c526-0044-4552-8739-677746c672c6",
+		"name": "API RESTful Productos - U3 OCI",
+		"description": "Colección de pruebas para la API RESTful de Productos desarrollada con Laravel y Eloquent ORM.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. GET - Obtener todos los productos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/productos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"productos"
+					]
+				},
+				"description": "Obtiene la lista completa de registros mediante Eloquent ORM. Retorna 200 OK."
+			},
+			"response": []
+		},
+		{
+			"name": "2. GET - Obtener producto por ID (200 OK)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/productos/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"1"
+					]
+				},
+				"description": "Obtiene un registro individual filtrado por su ID. Retorna 200 OK si existe."
+			},
+			"response": []
+		},
+		{
+			"name": "2.1 GET - Producto no encontrado (404 Not Found)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/productos/9999",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"9999"
+					]
+				},
+				"description": "Intenta obtener un producto inexistente. Retorna 404 Not Found."
+			},
+			"response": []
+		},
+		{
+			"name": "3. POST - Crear nuevo producto (201 Created)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Mouse Gamer Inalámbrico\",\n    \"descripcion\": \"Sensor óptico 16000 DPI, iluminación RGB, conectividad 2.4GHz\",\n    \"precio\": 799.99,\n    \"stock\": 25,\n    \"categoria\": \"Accesorios\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/productos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"productos"
+					]
+				},
+				"description": "Crea un nuevo registro recibido en JSON Body procesado por ORM. Retorna 201 Created."
+			},
+			"response": []
+		},
+		{
+			"name": "3.1 POST - Validación fallida (400 Bad Request)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/productos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"productos"
+					]
+				},
+				"description": "Envía campos incompletos o inválidos. Retorna 400 Bad Request."
+			},
+			"response": []
+		},
+		{
+			"name": "4. PUT - Actualizar producto (200 OK)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Laptop Gamer Pro 16 (Oferta)\",\n    \"precio\": 21999.00,\n    \"stock\": 10\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/productos/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"1"
+					]
+				},
+				"description": "Actualiza registro existente mediante JSON Body e ID en URL. Retorna 200 OK."
+			},
+			"response": []
+		},
+		{
+			"name": "5. DELETE - Eliminar producto (200 OK)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/productos/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"3"
+					]
+				},
+				"description": "Elimina un registro específico por ID utilizando el ORM. Retorna 200 OK."
+			},
+			"response": []
+		}
+	]
+}
